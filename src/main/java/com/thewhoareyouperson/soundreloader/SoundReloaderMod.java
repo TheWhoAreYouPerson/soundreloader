@@ -54,8 +54,9 @@ public class SoundReloaderMod {
 	public static final String MODID = "soundreloader";
 	public static final String VERSION = "1.0";
 	public static final Logger Logger = LogManager.getLogger(SoundReloaderMod.MODID);
-	public static final String mcVersion;
 	
+	protected static final String mcVersion;
+	protected static final boolean debug = System.getenv("DEBUG") != null && !System.getenv("DEBUG").isEmpty();
 	protected static final boolean devEnv = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 	
 	protected static KeyBinding soundBinding;
@@ -90,10 +91,11 @@ public class SoundReloaderMod {
 		        	SoundManager mngr = null;
 		        	Exception ex = null;
 		        	try {
+		        		if(debug)
+		        			for(Field fd : SoundHandler.class.getDeclaredFields())
+								Logger.info("SoundHandler Field: '" + fd.getName() + "' of type '" + fd.getType() + "'");
 		        		Field fi;
 		        		if(devEnv){
-							for(Field fd : SoundHandler.class.getDeclaredFields())
-								Logger.info("SoundHandler Field: '" + fd.getName() + "' of type '" + fd.getType() + "'");
 							fi = SoundHandler.class.getDeclaredField("sndManager");// mcpbot says field_148622_c but MC (code above) says field_147694_f
 		        		} else {
 		        			fi = SoundHandler.class.getDeclaredField("field_147694_f");// mcpbot says field_148622_c but MC (code above) says field_147694_f
