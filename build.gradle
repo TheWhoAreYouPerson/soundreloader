@@ -8,23 +8,20 @@ buildscript {
     }
 }
 
+
+
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
-version = "1.0-1.10.2"
+version = "1.1-1.8.9"
 group = "com.thewhoareyouperson.soundreloader" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "soundreloader"
 
-sourceCompatibility = targetCompatibility = "1.6" // Need this here so eclipse task generates correctly.
-compileJava {
-    sourceCompatibility = targetCompatibility = "1.6"
-}
-
 minecraft {
-    version = "1.10.2-12.18.2.2151"
+    version = "1.8.9-11.15.1.1902-1.8.9"
     runDir = "run"
     
-    mappings = "snapshot_20161111"
+    mappings = "stable_20"
 }
 
 dependencies {
