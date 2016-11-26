@@ -14,19 +14,18 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(modid = SoundReloaderMod.MODID, version = SoundReloaderMod.VERSION)
 public class SoundReloaderMod {
@@ -54,8 +53,9 @@ public class SoundReloaderMod {
 	public static final String MODID = "soundreloader";
 	public static final String VERSION = "1.0";
 	public static final Logger Logger = LogManager.getLogger(SoundReloaderMod.MODID);
-	public static final String mcVersion;
 	
+	protected static final String mcVersion;
+	protected static final boolean debug = System.getenv("DEBUG") != null && !System.getenv("DEBUG").isEmpty();
 	protected static final boolean devEnv = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 	
 	protected static KeyBinding soundBinding;
@@ -90,10 +90,11 @@ public class SoundReloaderMod {
 		        	SoundManager mngr = null;
 		        	Exception ex = null;
 		        	try {
-		        		Field fi;
-		        		if(devEnv){
+		        		if(debug)
 							for(Field fd : SoundHandler.class.getDeclaredFields())
 								Logger.info("SoundHandler Field: '" + fd.getName() + "' of type '" + fd.getType() + "'");
+		        		Field fi;
+			        	if(devEnv){
 							fi = SoundHandler.class.getDeclaredField("sndManager");// mcpbot says field_148622_c but MC (code above) says field_147694_f
 		        		} else {
 		        			fi = SoundHandler.class.getDeclaredField("field_147694_f");// mcpbot says field_148622_c but MC (code above) says field_147694_f
@@ -114,7 +115,6 @@ public class SoundReloaderMod {
 					}
 		        	cachedManager = mngr;
 	        	}
-	        	
 	        	
 	        	if(cachedManager != null){
 	        		cachedManager.reloadSoundSystem();
