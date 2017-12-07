@@ -43,7 +43,7 @@ public class SoundReloaderMod {
 	public static final String VERSION = "1.1";
 	public static final Logger Logger = LogManager.getLogger(SoundReloaderMod.MODID);
 	public static final String ERROR_STRING = SoundReloaderMod.NAME + " cannot access the minecraft version, and subsequently, the sound system. This mod will be inactive.";
-	public static final List<String> SUPPORTED_VERSIONS = Arrays.asList("1.7.10", "1.8.9", "1.10.2", "1.11.2");
+	public static final List<String> SUPPORTED_VERSIONS = Arrays.asList("1.7.10", "1.8.9", "1.10.2", "1.11.2", "1.12.2");
 	
 	private static final String DEFAULT_MAPPING = "field_147694_f";
 	private static boolean modInactive = false;
