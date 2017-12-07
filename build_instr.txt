@@ -1,0 +1,9 @@
+gradlew setupDecompWorkspace --refresh-dependencies
+gradlew eclipse
+
+-----
+
+gradlew jar
+gradlew reobf
+
+-- build/libs/whatever.jar
