@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = SoundReloaderMod.MODID, version = SoundReloaderMod.VERSION)
+@Mod(modid = SoundReloaderMod.MODID, version = SoundReloaderMod.VERSION, clientSideOnly = true)
 public class SoundReloaderMod {
 	static {
 		String tmpMcVersion;
